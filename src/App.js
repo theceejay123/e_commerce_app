@@ -11,6 +11,7 @@ import Navbar from './components/routing/navbar/_navbar';
 const AboutUs = lazy(() => import("./components/about_us/_about"));
 const ContactUs = lazy(() => import("./components/contact_us/_contact"));
 const Home = lazy(() => import("./components/home/_home"));
+const Product = lazy(() => import("./components/home/product/_product"));
 
 
 const App = () => {
@@ -29,6 +30,10 @@ const App = () => {
           <AppliedRouting
             path="/home"
             component={Home}
+          />
+          <AppliedRouting
+            path="/product/:id"
+            component={Product}
           />
           <AppliedRouting
             exact
