@@ -43,6 +43,7 @@ const Product = () => {
           />
           <CardContent>
             <Typography gutterBottom variant="h4" component="h2">{productDetail.name}</Typography>
+            <Button variant="contained" color="secondary" disableElevation>Add to Cart</Button>
             <Typography variant="h6" color="textSecondary" component="p">$ {productDetail.price}</Typography>
             <Typography variant="body2" color="textSecondary" component="p">{productDetail.description}</Typography>
           </CardContent>
