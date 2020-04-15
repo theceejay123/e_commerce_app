@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
   },
   "root": {
     margin: 0,
-    padding: 0
+    paddingTop: 10
   },
   "media": {
     height: '40rem',
