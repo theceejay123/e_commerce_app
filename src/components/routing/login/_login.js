@@ -3,7 +3,8 @@ import {
   Paper,
   Grid,
   TextField,
-  Button
+  Button,
+  Link
 } from '@material-ui/core';
 import {
   Face,
@@ -11,8 +12,10 @@ import {
 } from '@material-ui/icons';
 import useStyles from './styles/styles';
 
-const Login = () => {
+const Login = ({ history }) => {
   const classes = useStyles();
+
+
   return (
     <Paper className={classes.root}>
       <div className={classes.content}>
@@ -32,6 +35,9 @@ const Login = () => {
             <TextField id="password" label="Password" type="password" fullWidth required />
           </Grid>
         </Grid>
+        <Link href="" onClick={() => history.push('/register')}>
+          Not registered yet?
+        </Link>
         <Grid container justify="center" style={{ marginTop: '10px' }}>
           <Button variant="outlined" color="primary" style={{ textTransform: "none" }}>Login</Button>
         </Grid>

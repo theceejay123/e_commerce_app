@@ -13,6 +13,7 @@ const ContactUs = lazy(() => import("./components/contact_us/_contact"));
 const Home = lazy(() => import("./components/home/_home"));
 const Product = lazy(() => import("./components/home/product/_product"));
 const Login = lazy(() => import("./components/routing/login/_login"));
+const Register = lazy(() => import("./components/routing/register/_register"));
 
 
 const App = () => {
@@ -45,6 +46,11 @@ const App = () => {
             exact
             path="/login"
             component={Login}
+          />
+          <AppliedRouting
+            exact
+            path="/register"
+            component={Register}
           />
           <AppliedRouting
             exact
