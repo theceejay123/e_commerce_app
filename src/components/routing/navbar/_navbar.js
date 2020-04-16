@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 // Styling
 import useStyles from './styles/styles';
 
-const Navbar = ({ history }) => {
+const Navbar = ({ history, cProps }) => {
   const classes = useStyles();
 
   return (
@@ -34,7 +34,9 @@ const Navbar = ({ history }) => {
             />
           </div>
           <div className={classes.grow} />
-          <Button color="inherit" onClick={() => history.push(`/login`)}>Login</Button>
+          {/* if statement for login or logout */}
+          {cProps.customer === null ? <Button color="inherit" onClick={() => history.push(`/login`)}>Login</Button> :
+            <Button color="inherit" onClick={cProps.handleLogout}>Logout</Button>}
         </Toolbar>
       </AppBar >
     </div >

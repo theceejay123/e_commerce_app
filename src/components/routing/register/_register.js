@@ -14,7 +14,7 @@ import {
 import useStyles from './styles/styles';
 import axios from 'axios';
 
-const Register = ({ history, props }) => {
+const Register = (props, { history }) => {
   const classes = useStyles();
 
   const [provinces, setProvinces] = useState([]);
@@ -44,12 +44,10 @@ const Register = ({ history, props }) => {
   })
 
   const handleChange = (name) => (evt) => {
-    console.log(evt.target.value);
     setValues({ ...values, [name]: evt.target.value })
   }
 
   const handleProvinceChange = (evt) => {
-    console.log(evt.target.value);
     setValues({ ...values, province_id: evt.target.value })
   }
 
@@ -74,8 +72,8 @@ const Register = ({ history, props }) => {
     }).then(res => {
       if (res.status === 200) {
         localStorage.setItem("token", res.data.jwt);
+        props.handleLogin(res.data.customer)
       }
-      console.log(res.data);
     }).catch(e => console.log(e))
   }
 
