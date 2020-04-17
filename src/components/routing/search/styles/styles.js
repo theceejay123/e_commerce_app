@@ -9,11 +9,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     paddingTop: 10
   },
-  gridList: {
-    width: '100%',
-    height: '90vh',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
+  grid: {
+    paddingTop: 0,
+    paddingBottom: 2,
+  },
+  grid_container: {
+    overflow: 'scroll',
+    height: '81vh'
   },
   titleBar: {
     background:
@@ -23,6 +25,18 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'white',
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  select: {
+    marginTop: theme.spacing(2),
+  },
+  searchResult: {
+    fontSize: 30,
+    width: "100%",
+    fontStyle: 'italic'
+  }
 }));
 
 export default useStyles;

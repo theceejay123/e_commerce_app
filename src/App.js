@@ -17,11 +17,11 @@ const Home = lazy(() => import("./components/home/_home"));
 const Product = lazy(() => import("./components/home/product/_product"));
 const Login = lazy(() => import("./components/routing/login/_login"));
 const Register = lazy(() => import("./components/routing/register/_register"));
-
+const Search = lazy(() => import("./components/routing/search/_search"));
 
 const App = (props) => {
 
-  const [customer, setCustomer] = useState(null)
+  const [customer, setCustomer] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -66,9 +66,16 @@ const App = (props) => {
             path="/"
             render={() => <Redirect to='/home' />}
           />
+
           <AppliedRouting
             path="/home"
             component={Home}
+            props={childProps}
+          />
+          <AppliedRouting
+            exact
+            path="/search/:search"
+            component={Search}
             props={childProps}
           />
           <AppliedRouting

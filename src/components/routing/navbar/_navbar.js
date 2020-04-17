@@ -15,8 +15,7 @@ const Navbar = ({ history, cProps }) => {
 
   const handleKeyEnterSearchUp = (evt) => {
     if (evt.keyCode === 13) {
-      console.log(evt.target.value);
-
+      history.push(`/search/search_term=${evt.target.value}`);
     }
   }
 
