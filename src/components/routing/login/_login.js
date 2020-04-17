@@ -3,17 +3,17 @@ import {
   Paper,
   Grid,
   TextField,
-  Button,
-  Link
+  Button
 } from '@material-ui/core';
 import {
   Face,
   Fingerprint
 } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 import useStyles from './styles/styles';
 import axios from 'axios';
 
-const Login = (props, { history }) => {
+const Login = (props) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -65,7 +65,7 @@ const Login = (props, { history }) => {
             <TextField id="password" label="Password" type="password" fullWidth required onChange={handleChange("password")} />
           </Grid>
         </Grid>
-        <Link href="" onClick={() => history.push('/register')}>
+        <Link to="/register">
           Not registered yet?
         </Link>
         <Grid container justify="center" style={{ marginTop: '10px' }}>

@@ -25,7 +25,7 @@ const Navbar = ({ history, cProps }) => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Search By Name…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

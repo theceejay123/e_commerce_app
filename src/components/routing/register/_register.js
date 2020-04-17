@@ -4,7 +4,6 @@ import {
   Grid,
   TextField,
   Button,
-  Link,
   Select,
   MenuItem,
   InputLabel,
@@ -13,8 +12,9 @@ import {
 } from '@material-ui/core';
 import useStyles from './styles/styles';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const Register = (props, { history }) => {
+const Register = (props) => {
   const classes = useStyles();
 
   const [provinces, setProvinces] = useState([]);
@@ -128,7 +128,7 @@ const Register = (props, { history }) => {
             <TextField id="password" label="Password" type="password" fullWidth required onChange={handleChange("password")} />
           </Grid>
         </Grid>
-        <Link href="" onClick={() => history.push('/login')}>
+        <Link to="/login">
           Registered already?
         </Link>
         <Grid container justify="center" style={{ marginTop: '10px' }}>

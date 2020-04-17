@@ -40,7 +40,6 @@ const App = (props) => {
 
   const handleLogin = (customer) => {
     setCustomer(customer);
-    console.log(customer);
   }
 
   const handleLogout = () => {
