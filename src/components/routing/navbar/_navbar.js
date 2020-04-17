@@ -13,6 +13,13 @@ import useStyles from './styles/styles';
 const Navbar = ({ history, cProps }) => {
   const classes = useStyles();
 
+  const handleKeyEnterSearchUp = (evt) => {
+    if (evt.keyCode === 13) {
+      console.log(evt.target.value);
+
+    }
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="relative">
@@ -25,12 +32,13 @@ const Navbar = ({ history, cProps }) => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search By Name…"
+              placeholder="Search By Product…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onKeyUp={handleKeyEnterSearchUp}
             />
           </div>
           <div className={classes.grow} />
