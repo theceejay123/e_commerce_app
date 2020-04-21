@@ -18,10 +18,12 @@ const Product = lazy(() => import("./components/home/product/_product"));
 const Login = lazy(() => import("./components/routing/login/_login"));
 const Register = lazy(() => import("./components/routing/register/_register"));
 const Search = lazy(() => import("./components/routing/search/_search"));
+const Cart = lazy(() => import('./components/routing/cart/_cart'));
 
 const App = (props) => {
 
   const [customer, setCustomer] = useState(null);
+  // const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -38,6 +40,11 @@ const App = (props) => {
     }
   }, []);
 
+  // Always update when there is a new cart
+  // useEffect(() => {
+  //   console.log("did this update in app?");
+  // }, [cart])
+
   const handleLogin = (customer) => {
     setCustomer(customer);
   }
@@ -48,17 +55,24 @@ const App = (props) => {
     console.log("fired");
   }
 
+  // const addOrRemoveToCart = (cartArray) => {
+  //   if (cartArray.length !== cart.length) {
+  //     setCart(cartArray);
+  //   }
+  // }
+
   const childProps = {
     handleLogin: handleLogin,
     customer: customer,
-    handleLogout: handleLogout
+    handleLogout: handleLogout,
+    // addOrRemoveToCart: addOrRemoveToCart,
+    // cart: cart
   }
 
   return (
     <Router>
       {/* This is the navbar of the whole application */}
       <Navbar cProps={childProps} props={props} />
-
       <Suspense fallback={<div></div>}>
         <Switch>
           <Route
@@ -79,8 +93,16 @@ const App = (props) => {
             props={childProps}
           />
           <AppliedRouting
+            exact
             path="/product/:id"
             component={Product}
+            props={childProps}
+          />
+          <AppliedRouting
+            exact
+            path="/cart"
+            component={Cart}
+            props={childProps}
           />
           <AppliedRouting
             exact

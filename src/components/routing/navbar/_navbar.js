@@ -1,10 +1,16 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  InputBase,
+  Button,
+  IconButton,
+} from '@material-ui/core';
+import {
+  Search as SearchIcon,
+  ShoppingCart as ShoppingCartIcon
+} from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
 
 // Styling
@@ -41,6 +47,9 @@ const Navbar = ({ history, cProps }) => {
             />
           </div>
           <div className={classes.grow} />
+          <IconButton aria-label="show 11 new notifications" color="inherit" onClick={() => history.push('/cart')}>
+            <ShoppingCartIcon />
+          </IconButton>
           {/* if statement for login or logout */}
           {cProps.customer === null ? <Button color="inherit" onClick={() => history.push(`/login`)}>Login</Button> :
             <Button color="inherit" onClick={cProps.handleLogout}>Logout</Button>}
