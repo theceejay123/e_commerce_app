@@ -10,7 +10,7 @@ import {
   FormControl,
   MenuItem,
   Card,
-  CardActionArea,
+  // CardActionArea,
   CardMedia,
   CardContent,
   Typography,
@@ -59,7 +59,7 @@ const Search = ({ history }) => {
 
     getData();
     getCategories();
-  }, []);
+  }, [search]);
 
   useEffect(() => {
     if (searchParam.length > 0 || category.length > 0) {
@@ -74,7 +74,7 @@ const Search = ({ history }) => {
     } else {
       setFilteredProducts(products);
     }
-  }, [searchParam, category]);
+  }, [searchParam, category, products]);
 
   const handleSearchChange = (evt) => {
     setSearchParam(evt.target.value)
