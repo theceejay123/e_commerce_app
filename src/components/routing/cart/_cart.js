@@ -19,7 +19,6 @@ import {
 } from '@material-ui/icons';
 
 import useStyles from './styles/styles';
-import Axios from 'axios';
 
 const Cart = (props, { history }) => {
   const classes = useStyles();
@@ -32,8 +31,10 @@ const Cart = (props, { history }) => {
   }, [])
 
   const fetchCheckoutSession = async () => {
+    const cart_no_images = cart.map(item => item.id ? { ...item, "image": "" } : item)
+
     const payload = {
-      cart: JSON.stringify(cart),
+      cart: JSON.stringify(cart_no_images),
       id: props.customer.id
     }
 
@@ -45,6 +46,7 @@ const Cart = (props, { history }) => {
       .then(res => res)
 
     return sessionData.session.id;
+    // return payload;
   }
 
   const handleDelete = (productId) => {
@@ -54,12 +56,12 @@ const Cart = (props, { history }) => {
   }
   const handleChange = (product) => (evt) => {
     const cartArray = cart.map(item => item.id === product.id ? { ...item, quantity: evt.target.value } : item);
-    sessionStorage.setItem("cartSession", JSON.stringify(cartArray))
+    sessionStorage.setItem("cartSession", JSON.stringify(cartArray));
     setCart(cartArray);
   }
 
   const handleCheckout = async () => {
-    // console.log(await fetchCheckoutSession());
+    console.log(await fetchCheckoutSession());
     console.log(cart);
     console.log(props.customer);
 
