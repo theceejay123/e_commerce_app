@@ -43,6 +43,8 @@ const Cart = (props, { history }) => {
   const handleCheckout = () => {
     console.log(cart);
     console.log(props.customer);
+
+
   }
 
   return (

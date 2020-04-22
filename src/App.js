@@ -1,10 +1,11 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import axios from "axios";
+import { loadStripe } from '@stripe/stripe-js';
 
 // Routing
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import AppliedRouting from './components/routing/_appliedRouting';
-import AuthenticatedRouting from './components/routing/_authenticatedRouting';
+// import AuthenticatedRouting from './components/routing/_authenticatedRouting';
 import UnauthenticatedRouting from './components/routing/_unauthenticatedRouting';
 
 
@@ -19,6 +20,10 @@ const Login = lazy(() => import("./components/routing/login/_login"));
 const Register = lazy(() => import("./components/routing/register/_register"));
 const Search = lazy(() => import("./components/routing/search/_search"));
 const Cart = lazy(() => import('./components/routing/cart/_cart'));
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 const App = (props) => {
 
