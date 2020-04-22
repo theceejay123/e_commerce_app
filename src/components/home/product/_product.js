@@ -22,7 +22,9 @@ const Product = (props) => {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState([]);
   const [sizes, setSizes] = useState([]);
-  const [size, setSize] = useState("Messier 7");
+  const [size, setSize] = useState({
+    name: 'Wild Duck'
+  });
 
   const handleClick = () => {
     let isProduct = false;
@@ -37,13 +39,13 @@ const Product = (props) => {
       id: productDetail.id,
       quantity: 1,
       image: productDetail.thumbnail_url,
-      size: size
+      size: size.name.split("-")[0]
     });
     sessionStorage.setItem("cartSession", JSON.stringify(cartArray));
   }
 
   const handleChange = (evt) => {
-    setSize(evt.target.value)
+    setSize({ name: evt.target.value })
   }
 
   useEffect(() => {
@@ -91,15 +93,20 @@ const Product = (props) => {
             <Typography gutterBottom variant="h4" component="h2">{productDetail.name}</Typography>
             <TextField
               select
-              value={size}
+              value={size.name}
               label="Size"
               onChange={handleChange}
               variant='outlined'
             >
+              <MenuItem key={0} value="Wild Duck">
+                Wild Duck - <em>9x12</em>
+              </MenuItem>
               {sizes.map((option, index) => (
-                <MenuItem key={index} value={option.name}>
-                  {option.name}
-                </MenuItem>
+                option.name !== 'Wild Duck' && (
+                  <MenuItem key={index} value={option.name}>
+                    {option.name} - <em>{option.size}</em>
+                  </MenuItem>
+                )
               ))}
             </TextField>
             <Button variant="contained" color="secondary" disableElevation onClick={handleClick}>Add to Cart</Button>
