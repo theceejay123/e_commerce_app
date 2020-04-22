@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export default ({ component: C, props: cProps, ...rest }) => {
+export default function AuthenticatedRouting({ component: C, props: cProps, ...rest }) {
   /* if there is a user, it renders the authenticated component. if not then it redirects back to login page. */
   return (
     <Route
