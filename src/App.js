@@ -29,7 +29,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 const App = (props) => {
 
-  const [customer, setCustomer] = useState(sessionStorage.getItem("customer"));
+  const [customer, setCustomer] = useState(JSON.parse(sessionStorage.getItem("customer")));
   // const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const App = (props) => {
       }).then(res => {
         if (res.status === 200) {
           setCustomer(res.data);
-          sessionStorage.setItem("customer", res.data);
+          sessionStorage.setItem("customer", JSON.stringify(res.data));
         }
       })
     }

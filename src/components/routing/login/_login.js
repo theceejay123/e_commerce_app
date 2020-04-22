@@ -39,9 +39,10 @@ const Login = (props) => {
     axios.post("http://localhost:3000/login", body, {
       headers
     }).then(res => {
-      if (res.status === 200) {
+      if (res.status === 200 && res.data.jwt !== undefined) {
         localStorage.setItem("token", res.data.jwt)
         props.handleLogin(res.data.customer)
+        props.history.push('/home')
       }
     })
   }

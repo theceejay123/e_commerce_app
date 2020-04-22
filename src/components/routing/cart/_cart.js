@@ -20,7 +20,7 @@ import {
 
 import useStyles from './styles/styles';
 
-const Cart = (props, { history }) => {
+const Cart = (props) => {
   const classes = useStyles();
 
   const [cart, setCart] = useState([]);
@@ -31,7 +31,12 @@ const Cart = (props, { history }) => {
   }, [])
 
   const fetchCheckoutSession = async () => {
-    const cart_no_images = cart.map(item => item.id ? { ...item, "image": "" } : item)
+    const cart_no_images = cart.map(item => {
+      return {
+        quantity: item.quantity,
+        id: item.id
+      }
+    })
 
     const payload = {
       cart: JSON.stringify(cart_no_images),
@@ -61,17 +66,21 @@ const Cart = (props, { history }) => {
   }
 
   const handleCheckout = async () => {
-    console.log(await fetchCheckoutSession());
-    console.log(cart);
-    console.log(props.customer);
+    if (props.customer === null || props.customer === undefined || props.customer.length === 0) {
+      props.history.push('/login');
+    } else {
+      console.log(await fetchCheckoutSession());
+      console.log(cart);
+      console.log(props.customer);
 
-    const sessionId = await fetchCheckoutSession();
-    const stripe = await props.stripePromise;
-    const { error } = await stripe.redirectToCheckout({
-      sessionId,
-    })
+      const sessionId = await fetchCheckoutSession();
+      const stripe = await props.stripePromise;
+      const { error } = await stripe.redirectToCheckout({
+        sessionId,
+      })
 
-    console.log(error.message);
+      console.log(error.message);
+    }
   }
 
   return (
@@ -111,7 +120,7 @@ const Cart = (props, { history }) => {
         )) : <Typography className={classes.noItem}>No Items In The Cart</Typography>
         }
         <div className={classes.grow} />
-        <Button color="secondary" variant="contained" className={classes.buttonCheckout} onClick={handleCheckout}>Complete Checkout</Button>
+        <Button color="secondary" variant="contained" className={classes.buttonCheckout} onClick={handleCheckout} disabled={cart === null || cart.length === 0}>Complete Checkout</Button>
       </Paper>
     </div >)
 }
