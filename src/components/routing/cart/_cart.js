@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import {
   Typography,
@@ -18,6 +19,7 @@ import {
 } from '@material-ui/icons';
 
 import useStyles from './styles/styles';
+import Axios from 'axios';
 
 const Cart = (props, { history }) => {
   const classes = useStyles();
@@ -28,6 +30,22 @@ const Cart = (props, { history }) => {
   useEffect(() => {
     setCart(JSON.parse(sessionStorage.getItem("cartSession")));
   }, [])
+
+  const fetchCheckoutSession = async () => {
+    const payload = {
+      cart: JSON.stringify(cart),
+      id: props.customer.id
+    }
+
+    const sessionData = await fetch("http://localhost:3000/checkout/create", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: queryString.stringify(payload)
+    }).then(res => res.json())
+      .then(res => res)
+
+    return sessionData.session.id;
+  }
 
   const handleDelete = (productId) => {
     const cartArray = cart.filter(product => product.id !== productId)
@@ -40,11 +58,18 @@ const Cart = (props, { history }) => {
     setCart(cartArray);
   }
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    // console.log(await fetchCheckoutSession());
     console.log(cart);
     console.log(props.customer);
 
+    const sessionId = await fetchCheckoutSession();
+    const stripe = await props.stripePromise;
+    const { error } = await stripe.redirectToCheckout({
+      sessionId,
+    })
 
+    console.log(error.message);
   }
 
   return (

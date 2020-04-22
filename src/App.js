@@ -72,6 +72,7 @@ const App = (props) => {
     handleLogout: handleLogout,
     // addOrRemoveToCart: addOrRemoveToCart,
     // cart: cart
+    stripePromise: stripePromise
   }
 
   return (
