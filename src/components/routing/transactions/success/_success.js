@@ -22,7 +22,12 @@ const Success = (props, { history }) => {
       })
     }
 
+    const deleteCart = () => {
+      sessionStorage.removeItem("cartSession");
+    }
+
     fetchOrderDetailData();
+    deleteCart();
   }, [])
 
   return (
