@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 // Routing
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import AppliedRouting from './components/routing/_appliedRouting';
-// import AuthenticatedRouting from './components/routing/_authenticatedRouting';
+import AuthenticatedRouting from './components/routing/_authenticatedRouting';
 import UnauthenticatedRouting from './components/routing/_unauthenticatedRouting';
 
 
@@ -119,6 +119,18 @@ const App = (props) => {
             exact
             path="/contact"
             component={ContactUs}
+          />
+
+          <AuthenticatedRouting
+            path="/transaction_successful"
+            component={Success}
+            props={childProps}
+          />
+
+          <AuthenticatedRouting
+            path="/transaction_cancelled"
+            component={Cancel}
+            props={childProps}
           />
 
           <UnauthenticatedRouting
