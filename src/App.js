@@ -20,6 +20,8 @@ const Login = lazy(() => import("./components/routing/login/_login"));
 const Register = lazy(() => import("./components/routing/register/_register"));
 const Search = lazy(() => import("./components/routing/search/_search"));
 const Cart = lazy(() => import('./components/routing/cart/_cart'));
+const Success = lazy(() => import('./components/routing/transactions/success/_success'));
+const Cancel = lazy(() => import('./components/routing/transactions/cancel/_cancel'));
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -27,7 +29,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 const App = (props) => {
 
-  const [customer, setCustomer] = useState(null);
+  const [customer, setCustomer] = useState(sessionStorage.getItem("customer"));
   // const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -40,6 +42,7 @@ const App = (props) => {
       }).then(res => {
         if (res.status === 200) {
           setCustomer(res.data);
+          sessionStorage.setItem("customer", res.data);
         }
       })
     }
