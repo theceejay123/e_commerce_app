@@ -4,7 +4,8 @@ import queryString from 'query-string';
 import Axios from 'axios';
 
 import {
-  Paper
+  Paper,
+  Typography
 } from '@material-ui/core';
 import useStyles from './styles/styles';
 
@@ -42,8 +43,16 @@ const Success = (props, { history }) => {
 
   return (
     <div className={classes.root}>
+      {console.log(orderDetail[0])}
       <Paper className={classes.paper}>
-
+        <Typography>Transaction Number: #{orderDetail[0].order.reference_number}</Typography>
+        <Typography>Total: ${orderDetail[0].order.total}</Typography>
+        <div>
+          <Typography>Items:</Typography>
+          {orderDetail[0].products.map(product => (
+            <Typography key={product.id}>{product.name} </Typography>
+          ))}
+        </div>
       </Paper>
     </div>
   )
